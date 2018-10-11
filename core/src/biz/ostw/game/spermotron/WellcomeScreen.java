@@ -2,6 +2,7 @@ package biz.ostw.game.spermotron;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,10 +11,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-
-import javax.xml.soap.Text;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import biz.ostw.libgdx.DrawUtils;
+import biz.ostw.libgdx.util.FontBuilder;
 
 public class WellcomeScreen extends ScreenAdapter {
 
@@ -24,6 +28,8 @@ public class WellcomeScreen extends ScreenAdapter {
     private BitmapFont font;
 
     private Texture texture;
+
+    private Stage stage;
 
     private float width = Gdx.graphics.getWidth();
 
@@ -40,14 +46,37 @@ public class WellcomeScreen extends ScreenAdapter {
 
         this.batch = new SpriteBatch();
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("typesimp.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 150;
-        parameter.characters = FreeTypeFontGenerator.DEFAULT_CHARS;
+        this.stage = new Stage(new ScreenViewport(), this.batch);
+        this.stage.addActor(new Actor() {
 
-        this.font = generator.generateFont(parameter);
+            {
+                this.setPosition(-100, -100);
+                this.setBounds(0, 0, 1000, 1000);
+            }
 
-        generator.dispose();
+            @Override
+            public void draw(Batch batch, float parentAlpha) {
+                batch.draw(texture, 0f, 0f);
+            }
+
+            @Override
+            public boolean fire(Event event) {
+                System.out.println(event);
+                return super.fire(event);
+            }
+        });
+
+        Gdx.input.setInputProcessor(this.stage);
+
+        this.font = new FontBuilder(Gdx.files.internal("typesimp.ttf"))
+                .size(150)
+                .characters(FreeTypeFontGenerator.DEFAULT_CHARS)
+                .borderColor(Color.DARK_GRAY)
+                .borderWidth(3f)
+                .shadowColor(Color.LIGHT_GRAY)
+                .shadowOffsetX(10)
+                .shadowOffsetY(10)
+                .build();
     }
 
     @Override
@@ -70,6 +99,9 @@ public class WellcomeScreen extends ScreenAdapter {
         this.font.draw(this.batch, gl, -gl.width / 2, gl.height / 2);
 
         this.batch.end();
+
+        this.stage.act();
+//        this.stage.draw();
     }
 
     @Override
