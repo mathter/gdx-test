@@ -10,10 +10,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import biz.ostw.libgdx.DrawUtils;
@@ -44,39 +47,15 @@ public class WellcomeScreen extends ScreenAdapter {
         this.camera.setToOrtho(false, this.width, this.height);
         this.camera.position.set(0, 0, 0);
 
+        this.font = new BitmapFont(Gdx.files.internal("data/typesimp.fnt"), Gdx.files.internal("data/typesimp.png"), false);
+        this.font.getData().setScale(5);
+
         this.batch = new SpriteBatch();
 
         this.stage = new Stage(new ScreenViewport(), this.batch);
-        this.stage.addActor(new Actor() {
-
-            {
-                this.setPosition(-100, -100);
-                this.setBounds(0, 0, 1000, 1000);
-            }
-
-            @Override
-            public void draw(Batch batch, float parentAlpha) {
-                batch.draw(texture, 0f, 0f);
-            }
-
-            @Override
-            public boolean fire(Event event) {
-                System.out.println(event);
-                return super.fire(event);
-            }
-        });
+        this.stage.addActor(this.buildTextButton("GO!"));
 
         Gdx.input.setInputProcessor(this.stage);
-
-        this.font = new FontBuilder(Gdx.files.internal("typesimp.ttf"))
-                .size(150)
-                .characters(FreeTypeFontGenerator.DEFAULT_CHARS)
-                .borderColor(Color.DARK_GRAY)
-                .borderWidth(3f)
-                .shadowColor(Color.LIGHT_GRAY)
-                .shadowOffsetX(10)
-                .shadowOffsetY(10)
-                .build();
     }
 
     @Override
@@ -101,7 +80,26 @@ public class WellcomeScreen extends ScreenAdapter {
         this.batch.end();
 
         this.stage.act();
-//        this.stage.draw();
+        this.stage.draw();
+    }
+
+    private TextButton buildTextButton(String text) {
+        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("ui/ui.atlas"));
+        Skin skin = new Skin(atlas);
+
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
+        style.up = skin.getDrawable("button");
+        style.over = skin.getDrawable("button");
+        style.down = skin.getDrawable("button_pressed");
+        style.pressedOffsetX = 1;
+        style.pressedOffsetY = -1;
+        style.font = this.font;
+
+        return new TextButton(text, style){
+            {
+                this.setPosition(400,400);
+            }
+        };
     }
 
     @Override
