@@ -2,6 +2,7 @@ package biz.ostw.game.spermotron;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,7 +10,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 
 import javax.xml.soap.Text;
 
@@ -24,6 +32,8 @@ public class WellcomeScreen extends ScreenAdapter {
     private BitmapFont font;
 
     private Texture texture;
+
+    private Stage stage;
 
     private float width = Gdx.graphics.getWidth();
 
@@ -46,6 +56,12 @@ public class WellcomeScreen extends ScreenAdapter {
         parameter.characters = FreeTypeFontGenerator.DEFAULT_CHARS;
 
         this.font = generator.generateFont(parameter);
+
+        this.stage = new Stage(new ScreenViewport(this.camera));
+
+        Actor a = this.buildTextButton("Go!");
+        a.setPosition(100, 100);
+        this.stage.addActor(a);
 
         generator.dispose();
     }
@@ -80,4 +96,19 @@ public class WellcomeScreen extends ScreenAdapter {
     }
 
 
+    private TextButton buildTextButton(String text) {
+
+        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("ui/ui.atlas"));
+        Skin skin = new Skin(atlas);
+
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.up = skin.getDrawable("button");
+        textButtonStyle.over = skin.getDrawable("button");
+        textButtonStyle.down = skin.getDrawable("button");
+        textButtonStyle.pressedOffsetX = 1;
+        textButtonStyle.pressedOffsetY = -1;
+        textButtonStyle.font = this.font;
+
+        return new TextButton(text, textButtonStyle);
+    }
 }
