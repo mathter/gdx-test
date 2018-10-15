@@ -7,7 +7,6 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="50mm"
@@ -17,33 +16,11 @@
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="button.svg"
-   inkscape:export-filename="/home/kashirsky-av/dev/git/stronn/design/forprocessing/button.png"
+   inkscape:export-filename="/home/mathter/dev/git/sptronn/design/forprocessing/ui/button.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
-     id="defs2">
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient12653">
-      <stop
-         style="stop-color:#95e3d4;stop-opacity:1;"
-         offset="0"
-         id="stop12649" />
-      <stop
-         style="stop-color:#95e3d4;stop-opacity:0;"
-         offset="1"
-         id="stop12651" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient12653"
-       id="linearGradient12655"
-       x1="26.539701"
-       y1="-295.38608"
-       x2="26.934803"
-       y2="-232.44411"
-       gradientUnits="userSpaceOnUse" />
-  </defs>
+     id="defs2" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -52,16 +29,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8901492"
-     inkscape:cx="83.712026"
+     inkscape:cx="21.950508"
      inkscape:cy="112.71251"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1352"
-     inkscape:window-height="876"
-     inkscape:window-x="79"
-     inkscape:window-y="131"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1920"
+     inkscape:window-height="1051"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -80,14 +57,14 @@
      id="layer1"
      transform="translate(0,-247)">
     <rect
-       style="opacity:1;fill:#e9feff;fill-opacity:1;fill-rule:nonzero;stroke:url(#linearGradient12655);stroke-width:2.165;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:0.54125, 0.54125000000000001;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       style="opacity:1;fill:#83830e;fill-opacity:0.42211056;fill-rule:nonzero;stroke:#83830e;stroke-width:8;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="rect11068"
-       width="44.735001"
-       height="44.735001"
-       x="2.6324997"
-       y="-294.36749"
-       rx="2.5"
-       ry="2.5"
+       width="40"
+       height="40"
+       x="5"
+       y="-292"
+       rx="11.730775"
+       ry="20"
        transform="scale(1,-1)" />
   </g>
 </svg>
