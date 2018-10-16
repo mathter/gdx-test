@@ -2,6 +2,8 @@ package biz.ostw.game.spermotron;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -15,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -47,13 +50,12 @@ public class WellcomeScreen extends ScreenAdapter {
 
         this.atlas = new TextureAtlas(Gdx.files.internal("pack.atlas"));
         this.skin = new Skin(this.atlas);
+        this.skin.load(Gdx.files.internal("pack.skin"));
+        this.font = this.skin.getFont("font");
 
         this.camera = new OrthographicCamera();
-        this.viewport = new ScreenViewport();//(this.width, 1024, this.camera);
+        this.viewport = new ExtendViewport(1, 1024, this.camera);
         this.stage = new Stage(viewport);
-
-        this.font = new FontBuilder(Gdx.files.internal("typesimp.ttf")).color(Color.GRAY).size(50).build();
-        this.font.getData().setScale(5);
 
         this.stage = new Stage(this.viewport);
         this.stage.addActor(new Actor() {
@@ -84,27 +86,12 @@ public class WellcomeScreen extends ScreenAdapter {
     }
 
     private TextButton buildTextButton(String text, final int x, final int y) {
-        Skin skin = new Skin(atlas);
 
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.up = skin.getDrawable("ui/button");
-        style.over = skin.getDrawable("ui/button");
-        style.down = skin.getDrawable("ui/button_pressed");
-        style.pressedOffsetX = 1;
-        style.pressedOffsetY = -1;
-        style.font = this.font;
-
-        return new TextButton(text, style) {
-            {
-                this.setPosition(x, y);
-            }
-        };
+        return new TextButton(text, skin, "default");
     }
 
     @Override
     public void dispose() {
-        this.atlas.dispose();
         this.skin.dispose();
-        this.font.dispose();
     }
 }

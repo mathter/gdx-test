@@ -1,0 +1,13 @@
+
+pack.png
+size: 1024,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+pregnant
+  rotate: false
+  xy: 2, 2
+  size: 691, 1024
+  orig: 691, 1024
+  offset: 0, 0
+  index: -1

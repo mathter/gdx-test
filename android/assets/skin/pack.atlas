@@ -1,30 +1,17 @@
 
 pack.png
-size: 1024,2048
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-wellcome/pregnant
-  rotate: false
-  xy: 2, 2
-  size: 691, 1024
-  orig: 691, 1024
-  offset: 0, 0
-  index: -1
-
-pack2.png
 size: 512,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-ui/button
+button
   rotate: false
   xy: 2, 2
   size: 181, 181
   orig: 181, 181
   offset: 0, 0
   index: -1
-ui/button
+button
   rotate: false
   xy: 2, 2
   size: 181, 181
@@ -33,14 +20,14 @@ ui/button
   orig: 181, 181
   offset: 0, 0
   index: -1
-ui/button_pressed
+button_pressed
   rotate: false
   xy: 185, 2
   size: 181, 181
   orig: 181, 181
   offset: 0, 0
   index: -1
-ui/button_pressed
+button_pressed
   rotate: false
   xy: 185, 2
   size: 181, 181
