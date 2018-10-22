@@ -22,6 +22,8 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.Locale;
+
 import biz.ostw.libgdx.DrawUtils;
 import biz.ostw.libgdx.util.FontBuilder;
 
@@ -73,6 +75,10 @@ public class WellcomeScreen extends ScreenAdapter {
         this.stage.addActor(this.buildTextButton("GO!", 0, 0));
 
         Gdx.input.setInputProcessor(this.stage);
+
+        BitmapFont[] fonts = SkinFactory.bitmapFonts(Locale.CANADA);
+
+        System.out.println(fonts);
     }
 
     @Override
