@@ -1,0 +1,60 @@
+{
+  com.badlogic.gdx.graphics.g2d.BitmapFont: {
+    ordinal-font-normal: {
+      file: fonts/default/ubuntu.fnt
+    }
+
+    ordinal-font-min: {
+      file: fonts/default/ubuntu.fnt
+    }
+
+    ordinal-font-max: {
+      file: fonts/default/ubuntu.fnt
+    }
+
+    decor-font-normal: {
+      file: fonts/default/typesimp.fnt
+    }
+
+    decor-font-min: {
+      file: fonts/default/typesimp.fnt
+    }
+
+    decor-font-max: {
+      file: fonts/default/typesimp.fnt
+      scaledSize: 100
+    }
+  }
+
+  com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+    default: {
+      up: button
+
+      down: button_pressed
+
+      over: button
+
+      font: ordinal-font-normal
+    }
+
+    default-decor-normal: {
+      up: button
+
+      down: button_pressed
+
+      over: button
+
+      font: decor-font-normal
+    }
+
+    default-decor-max: {
+      up: button
+
+      down: button_pressed
+
+      over: button
+
+      font: decor-font-max
+    }
+  }
+}
