@@ -1,4 +1,4 @@
-package biz.ostw.game.spermotron.wellcome;
+package biz.ostw.game.tank.wellcome;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;

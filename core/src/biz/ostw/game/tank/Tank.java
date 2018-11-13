@@ -1,11 +1,11 @@
-package biz.ostw.game.spermotron;
+package biz.ostw.game.tank;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
-import biz.ostw.game.spermotron.wellcome.Screen;
+import biz.ostw.game.tank.wellcome.Screen;
 
-public class Spermotron extends Game {
+public class Tank extends Game {
 
     private OrthographicCamera camera;
 
