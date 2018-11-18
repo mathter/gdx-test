@@ -1,0 +1,79 @@
+
+pack.png
+size: 1024,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+tank/0/body
+  rotate: false
+  xy: 2, 2
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+tank/0/track
+  rotate: false
+  xy: 504, 102
+  size: 110, 400
+  orig: 110, 400
+  offset: 0, 0
+  index: 0
+tank/0/track
+  rotate: false
+  xy: 616, 102
+  size: 110, 400
+  orig: 110, 400
+  offset: 0, 0
+  index: 1
+tank/0/track
+  rotate: false
+  xy: 728, 102
+  size: 110, 400
+  orig: 110, 400
+  offset: 0, 0
+  index: 2
+tank/0/track
+  rotate: false
+  xy: 840, 102
+  size: 110, 400
+  orig: 110, 400
+  offset: 0, 0
+  index: 3
+
+pack2.png
+size: 512,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+skin/button
+  rotate: false
+  xy: 2, 2
+  size: 181, 181
+  orig: 181, 181
+  offset: 0, 0
+  index: -1
+skin/button
+  rotate: false
+  xy: 2, 2
+  size: 181, 181
+  split: 60, 60, 79, 92
+  pad: 44, 43, 31, 31
+  orig: 181, 181
+  offset: 0, 0
+  index: -1
+skin/button_pressed
+  rotate: false
+  xy: 185, 2
+  size: 181, 181
+  orig: 181, 181
+  offset: 0, 0
+  index: -1
+skin/button_pressed
+  rotate: false
+  xy: 185, 2
+  size: 181, 181
+  split: 61, 60, 79, 89
+  pad: 41, 43, 32, 33
+  orig: 181, 181
+  offset: 0, 0
+  index: -1
