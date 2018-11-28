@@ -2,7 +2,9 @@ package biz.ostw.game.tank;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.physics.box2d.Body;
 
+import biz.ostw.game.tank.obj.ObjectFactory;
 import biz.ostw.game.tank.wellcome.Screen;
 
 public class Tank extends Game {
@@ -11,6 +13,8 @@ public class Tank extends Game {
 
     @Override
     public void create() {
+
+        Body body = ObjectFactory.get(biz.ostw.game.tank.obj.Tank.SELF);
 
         Screen screen = new Screen();
         this.setScreen(screen);
