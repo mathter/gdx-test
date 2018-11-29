@@ -1,6 +1,5 @@
 package biz.ostw.game.tank.obj;
 
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.HashMap;
@@ -12,12 +11,12 @@ public abstract class ObjectFactory {
 
     private static final Map<Object, ObjectFactory> MAP = load();
 
-    public static final <T extends Enum<T>> Body get(World world, Enum<T> type) {
+    public static final <T> T get(World world, Object type) {
 
         ObjectFactory objectFactory = MAP.get(type);
 
         if (objectFactory != null) {
-            return objectFactory.build(world, type);
+            return objectFactory.<T>build(world, type);
         } else {
             throw new NoSuchElementException("There is not ObjectFactory for type '" + type + "'!");
         }
@@ -25,7 +24,7 @@ public abstract class ObjectFactory {
 
     public abstract Object[] supportedKeys();
 
-    public abstract <T extends Enum<T>> Body build(World world, Enum<T> type);
+    public abstract <T> T build(World world, Object type);
 
     private static Map<Object, ObjectFactory> load() {
 

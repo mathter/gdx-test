@@ -2,26 +2,32 @@ package biz.ostw.game.tank.obj;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
-
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class TankObjectFactory extends ObjectFactory {
 
     @Override
     public Object[] supportedKeys() {
-        return Tank.values();
+        return TankType.values();
     }
 
     @Override
-    public <T extends Enum<T>> Body build(World world, Enum<T> type) {
+    public <T> T build(World world, Object type) {
 
         BodyDef def = new BodyDef();
 
         def.type = BodyDef.BodyType.DynamicBody;
         Body body = world.createBody(def);
+
+        PolygonShape shape = new PolygonShape();
+
+        shape.setAsBox(250f, 250f);
+        Fixture fixture = body.createFixture(shape, 1f);
+
+        shape.dispose();
 
         return null;
     }
