@@ -15,8 +15,6 @@ public class Tank extends Game {
     @Override
     public void create() {
 
-        Body body = ObjectFactory.get(null, TankType.SELF);
-
         Screen screen = new Screen();
         this.setScreen(screen);
     }
