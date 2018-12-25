@@ -31,13 +31,14 @@ public class Tank implements Spatial, Drawable, Updatable {
     Tank(Body body, TextureRegion textureSprite, Animation<TextureRegion> trackAnimation) {
 
         this.body = body;
+        this.body.setActive(true);
         this.bodySprite = new Sprite(textureSprite);
 
         this.trackAnimation = trackAnimation;
 
         PolygonShape shape = new PolygonShape();
 
-        shape.setAsBox(250f, 250f);
+        shape.setAsBox(250, 250);
         Fixture fixture = body.createFixture(shape, 1f);
 
 //        this.body.setTransform(0, 0, 10);

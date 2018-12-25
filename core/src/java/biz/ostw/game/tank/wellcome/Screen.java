@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import biz.ostw.game.tank.SideOfLight;
@@ -43,19 +44,28 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
 
     private Tank tank;
 
+    private SpriteBatch batch;
+
     private World world;
+
+    {
+        this.box2DDebugRenderer.setDrawInactiveBodies(true);
+    }
 
     @Override
     public void show() {
 
         this.camera = new OrthographicCamera();
-        this.viewport = new ExtendViewport(1, 5000, this.camera);
+//        this.camera.position.set(width / 2, height / 2, 0);
+        this.camera.update();
+        this.viewport = new ExtendViewport(1, 2000, this.camera);
+        this.batch = new SpriteBatch();
 
-        this.world = new World(new Vector2(0, 0), true);
+        this.world = new World(new Vector2(0, 0), false);
 
         this.tank = ObjectFactory.get(world, TankType.SELF);
         this.tank.setSideOfLight(SideOfLight.SOUTH);
-        this.tank.setPosition(new Vector2(0, 0));
+        this.tank.setPosition(new Vector2(1000, 1000));
 
         Gdx.input.setInputProcessor(new GestureDetector(this));
     }
@@ -63,10 +73,15 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(0.2f, 0.2f, 0f, 1f);
+        world.step(1 / 60f, 6, 2);
+        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
 
+        this.batch.setProjectionMatrix(this.camera.combined);
+        this.batch.begin();
+        this.tank.draw(this.batch, 1);
+        this.batch.end();
         this.box2DDebugRenderer.render(this.world, this.camera.combined);
     }
 
