@@ -3,6 +3,7 @@ package biz.ostw.game.tank.wellcome;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -20,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -30,7 +33,7 @@ import biz.ostw.game.tank.obj.TankType;
 
 public class Screen extends ScreenAdapter implements GestureDetector.GestureListener {
 
-    private static final float SPEED = 400;
+    private static final float SPEED = 1000;
 
     private OrthographicCamera camera;
 
@@ -48,6 +51,8 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
 
     private World world;
 
+    private ShapeRenderer sr;
+
     {
         this.box2DDebugRenderer.setDrawInactiveBodies(true);
     }
@@ -56,30 +61,35 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
     public void show() {
 
         this.camera = new OrthographicCamera();
-//        this.camera.position.set(width / 2, height / 2, 0);
-        this.camera.update();
-        this.viewport = new ExtendViewport(1, 2000, this.camera);
+        camera.setToOrtho(false);
+        this.viewport = new ExtendViewport(5000, 5000, this.camera);
+        this.viewport.update((int) width, (int) height);
+        this.viewport.apply(true);
         this.batch = new SpriteBatch();
 
         this.world = new World(new Vector2(0, 0), false);
 
         this.tank = ObjectFactory.get(world, TankType.SELF);
-        this.tank.setSideOfLight(SideOfLight.SOUTH);
-        this.tank.setPosition(new Vector2(1000, 1000));
+        this.tank.setSideOfLight(SideOfLight.NORTH);
+        this.tank.setPosition(new Vector2(width / 2, height / 2));
+
 
         Gdx.input.setInputProcessor(new GestureDetector(this));
+
+        sr = new ShapeRenderer();
     }
 
     @Override
     public void render(float delta) {
 
+        this.camera.update();
         world.step(1 / 60f, 6, 2);
-        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+        Gdx.gl.glClearColor(0.2f, 0.2f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-
 
         this.batch.setProjectionMatrix(this.camera.combined);
         this.batch.begin();
+
         this.tank.draw(this.batch, 1);
         this.batch.end();
         this.box2DDebugRenderer.render(this.world, this.camera.combined);

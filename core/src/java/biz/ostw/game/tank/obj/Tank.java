@@ -11,10 +11,13 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Transform;
+import com.badlogic.gdx.physics.box2d.World;
 
 import biz.ostw.game.tank.SideOfLight;
 
 public class Tank implements Spatial, Drawable, Updatable {
+
+    private final float HALF_SIZE = 250;
 
     private final Body body;
 
@@ -38,10 +41,9 @@ public class Tank implements Spatial, Drawable, Updatable {
 
         PolygonShape shape = new PolygonShape();
 
-        shape.setAsBox(250, 250);
+        shape.setAsBox(HALF_SIZE, HALF_SIZE);
         Fixture fixture = body.createFixture(shape, 1f);
 
-//        this.body.setTransform(0, 0, 10);
         shape.dispose();
     }
 
@@ -49,6 +51,8 @@ public class Tank implements Spatial, Drawable, Updatable {
     public void draw(Batch batch, float parentAlpha) {
 
         Vector2 p = this.body.getPosition();
+        p.add(-HALF_SIZE, -HALF_SIZE);
+        this.bodySprite.setPosition(p.x, p.y);
         this.bodySprite.draw(batch);
 
 
@@ -59,30 +63,27 @@ public class Tank implements Spatial, Drawable, Updatable {
         TextureRegion frame = this.trackAnimation.getKeyFrame(this.time);
         Transform transform = this.body.getTransform();
 
-
-        Vector2 v = transform.getPosition();
-
         batch.draw(frame,
-                v.x,
-                v.y,
+                p.x,
+                p.y,
                 this.bodySprite.getWidth() / 2,
                 this.bodySprite.getHeight() / 2,
                 frame.getRegionWidth(),
                 frame.getRegionHeight(),
                 1,
                 1,
-                transform.getRotation());
+                this.bodySprite.getRotation());
 
         batch.draw(frame,
-                v.x + this.bodySprite.getWidth() - 110,
-                v.y,
+                p.x + this.bodySprite.getWidth() - 110,
+                p.y,
                 -(this.bodySprite.getWidth()) / 2 + 110,
                 this.bodySprite.getHeight() / 2,
                 frame.getRegionWidth(),
                 frame.getRegionHeight(),
                 1,
                 1,
-                transform.getRotation());
+                this.bodySprite.getRotation());
     }
 
     @Override
@@ -95,18 +96,22 @@ public class Tank implements Spatial, Drawable, Updatable {
             case NORTH:
 
                 this.body.setTransform(transform.getPosition(), 0);
+                this.bodySprite.setRotation(0);
                 break;
 
             case EAST:
-                this.body.setTransform(transform.getPosition(), MathUtils.PI / 2);
+                this.body.setTransform(transform.getPosition(), MathUtils.PI * 3 / 2);
+                this.bodySprite.setRotation(270);
                 break;
 
             case SOUTH:
                 this.body.setTransform(transform.getPosition(), MathUtils.PI);
+                this.bodySprite.setRotation(180);
                 break;
 
             case WEST:
                 this.body.setTransform(transform.getPosition(), -MathUtils.PI * 2);
+                this.bodySprite.setRotation(90);
                 break;
         }
     }
@@ -134,7 +139,10 @@ public class Tank implements Spatial, Drawable, Updatable {
 
     public void setSpeed(float speed) {
         this.trackAnimation.setFrameDuration(12.5f / speed);
-        this.speed = speed;
+        this.speed = speed*10;
+        Vector2 v = new Vector2(0, this.speed);
+        v.rotate(this.bodySprite.getRotation());
+        this.body.setLinearVelocity(v);
     }
 
     @Override
