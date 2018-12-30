@@ -24,7 +24,7 @@ public class TankObjectFactory extends ObjectFactory {
 
         BodyDef def = new BodyDef();
 
-        def.type = BodyDef.BodyType.DynamicBody;
+        def.type = BodyDef.BodyType.KinematicBody;
 
         Body body = world.createBody(def);
 

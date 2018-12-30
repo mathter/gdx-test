@@ -9,11 +9,13 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.MassData;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Transform;
 import com.badlogic.gdx.physics.box2d.World;
 
 import biz.ostw.game.tank.SideOfLight;
+import biz.ostw.libgdx.DrawUtils;
 
 public class Tank implements Spatial, Drawable, Updatable {
 
@@ -36,12 +38,15 @@ public class Tank implements Spatial, Drawable, Updatable {
         this.body = body;
         this.body.setActive(true);
         this.bodySprite = new Sprite(textureSprite);
+//        MassData md = new MassData();
+//        md.mass = 10;
+//        this.body.setMassData(md);
 
         this.trackAnimation = trackAnimation;
 
         PolygonShape shape = new PolygonShape();
 
-        shape.setAsBox(HALF_SIZE, HALF_SIZE);
+        shape.setAsBox(HALF_SIZE * DrawUtils.MPP, HALF_SIZE * DrawUtils.MPP);
         Fixture fixture = body.createFixture(shape, 1f);
 
         shape.dispose();
@@ -51,6 +56,8 @@ public class Tank implements Spatial, Drawable, Updatable {
     public void draw(Batch batch, float parentAlpha) {
 
         Vector2 p = this.body.getPosition();
+        p.x = p.x * DrawUtils.PPM;
+        p.y = p.y * DrawUtils.PPM;
         p.add(-HALF_SIZE, -HALF_SIZE);
         this.bodySprite.setPosition(p.x, p.y);
         this.bodySprite.draw(batch);
@@ -138,8 +145,9 @@ public class Tank implements Spatial, Drawable, Updatable {
     }
 
     public void setSpeed(float speed) {
-        this.trackAnimation.setFrameDuration(12.5f / speed);
-        this.speed = speed*10;
+        this.trackAnimation.setFrameDuration(0.2f * speed);
+
+        this.speed = speed * DrawUtils.MPP;
         Vector2 v = new Vector2(0, this.speed);
         v.rotate(this.bodySprite.getRotation());
         this.body.setLinearVelocity(v);

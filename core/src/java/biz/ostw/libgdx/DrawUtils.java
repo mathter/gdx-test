@@ -8,6 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class DrawUtils {
 
+    public static final float PPM = 500f;
+
+    public static final float MPP = 1 / PPM;
+
     public static void drawInscribed(Batch batch, Texture texture, float x, float y, float width, float height) {
 
         final float textureWidth = texture.getWidth();
