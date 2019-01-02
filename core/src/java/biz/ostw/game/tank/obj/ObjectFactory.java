@@ -1,13 +1,14 @@
 package biz.ostw.game.tank.obj;
 
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Disposable;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.ServiceLoader;
 
-public abstract class ObjectFactory {
+public abstract class ObjectFactory implements Disposable {
 
     private static final Map<Object, ObjectFactory> MAP = load();
 
@@ -24,7 +25,7 @@ public abstract class ObjectFactory {
 
     public abstract Object[] supportedKeys();
 
-    public abstract <T> T build(World world, Object type);
+    public abstract <T> T build(World world, Object type, Object... params);
 
     private static Map<Object, ObjectFactory> load() {
 

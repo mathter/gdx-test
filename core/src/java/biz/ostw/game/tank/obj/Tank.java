@@ -15,11 +15,10 @@ import com.badlogic.gdx.physics.box2d.Transform;
 import com.badlogic.gdx.physics.box2d.World;
 
 import biz.ostw.game.tank.SideOfLight;
+import biz.ostw.game.tank.TextureFactory;
 import biz.ostw.libgdx.DrawUtils;
 
 public class Tank implements Spatial, Drawable, Updatable {
-
-    private final float HALF_SIZE = 250;
 
     private final Body body;
 
@@ -35,30 +34,20 @@ public class Tank implements Spatial, Drawable, Updatable {
 
     Tank(Body body, TextureRegion textureSprite, Animation<TextureRegion> trackAnimation) {
 
+        body.setUserData(this);
+
         this.body = body;
         this.body.setActive(true);
         this.bodySprite = new Sprite(textureSprite);
-//        MassData md = new MassData();
-//        md.mass = 10;
-//        this.body.setMassData(md);
 
         this.trackAnimation = trackAnimation;
-
-        PolygonShape shape = new PolygonShape();
-
-        shape.setAsBox(HALF_SIZE * DrawUtils.MPP, HALF_SIZE * DrawUtils.MPP);
-        Fixture fixture = body.createFixture(shape, 1f);
-
-        shape.dispose();
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
-        Vector2 p = this.body.getPosition();
-        p.x = p.x * DrawUtils.PPM;
-        p.y = p.y * DrawUtils.PPM;
-        p.add(-HALF_SIZE, -HALF_SIZE);
+        Vector2 p = DrawUtils.box2d2screen2d(this.body.getTransform().getPosition(), -TankObjectFactory.HALF_SIZE);
+
         this.bodySprite.setPosition(p.x, p.y);
         this.bodySprite.draw(batch);
 

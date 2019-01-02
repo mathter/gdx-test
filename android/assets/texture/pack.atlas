@@ -1,5 +1,46 @@
 
 pack.png
+size: 1024,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+landscape/block
+  rotate: false
+  xy: 2, 4
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: -1
+landscape/brick
+  rotate: false
+  xy: 758, 129
+  size: 125, 125
+  orig: 125, 125
+  offset: 0, 0
+  index: 0
+landscape/brick
+  rotate: false
+  xy: 758, 2
+  size: 125, 125
+  orig: 125, 125
+  offset: 0, 0
+  index: 1
+landscape/forest
+  rotate: false
+  xy: 254, 4
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: -1
+landscape/river
+  rotate: false
+  xy: 506, 4
+  size: 250, 250
+  orig: 250, 250
+  offset: 0, 0
+  index: -1
+
+pack2.png
 size: 1024,512
 format: RGBA8888
 filter: Nearest,Nearest
@@ -39,41 +80,3 @@ tank/0/track
   orig: 110, 400
   offset: 0, 0
   index: 3
-
-pack2.png
-size: 512,256
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-skin/button
-  rotate: false
-  xy: 2, 2
-  size: 181, 181
-  orig: 181, 181
-  offset: 0, 0
-  index: -1
-skin/button
-  rotate: false
-  xy: 2, 2
-  size: 181, 181
-  split: 60, 60, 79, 92
-  pad: 44, 43, 31, 31
-  orig: 181, 181
-  offset: 0, 0
-  index: -1
-skin/button_pressed
-  rotate: false
-  xy: 185, 2
-  size: 181, 181
-  orig: 181, 181
-  offset: 0, 0
-  index: -1
-skin/button_pressed
-  rotate: false
-  xy: 185, 2
-  size: 181, 181
-  split: 61, 60, 79, 89
-  pad: 41, 43, 32, 33
-  orig: 181, 181
-  offset: 0, 0
-  index: -1

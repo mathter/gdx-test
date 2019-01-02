@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import biz.ostw.game.tank.SideOfLight;
 
-interface Spatial {
+public interface Spatial {
 
     public void setSideOfLight(SideOfLight sideOfLight);
 

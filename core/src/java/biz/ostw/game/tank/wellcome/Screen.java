@@ -17,7 +17,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -25,14 +29,23 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import biz.ostw.game.tank.SideOfLight;
+import biz.ostw.game.tank.obj.Drawable;
+import biz.ostw.game.tank.obj.LandscapeElement;
+import biz.ostw.game.tank.obj.LandscapeFactory;
+import biz.ostw.game.tank.obj.LandscapeType;
 import biz.ostw.game.tank.obj.ObjectFactory;
+import biz.ostw.game.tank.obj.Spatial;
 import biz.ostw.game.tank.obj.Tank;
 import biz.ostw.game.tank.obj.TankType;
 import biz.ostw.libgdx.DrawUtils;
@@ -60,7 +73,9 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
     private ShapeRenderer sr;
 
     {
-        this.box2DDebugRenderer.setDrawInactiveBodies(true);
+        this.box2DDebugRenderer.setDrawInactiveBodies(false);
+        this.box2DDebugRenderer.setDrawBodies(true);
+        this.box2DDebugRenderer.setDrawVelocities(true);
     }
 
     @Override
@@ -68,20 +83,56 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
 
         this.camera = new OrthographicCamera(0.05f * (width / height), 14);
         camera.setToOrtho(false);
-        this.viewport = new ExtendViewport(8000, 8000, this.camera);
+        this.viewport = new ExtendViewport(6500, 6500, this.camera);
         this.viewport.update((int) width, (int) height);
         this.viewport.apply(true);
         this.batch = new SpriteBatch();
 
         this.world = new World(new Vector2(0, 0), false);
-        World.setVelocityThreshold(0.005f);
-
-        this.tank = ObjectFactory.get(world, TankType.SELF);
-        this.tank.setSideOfLight(SideOfLight.NORTH);
-        this.tank.setPosition(new Vector2(0,0));
 
 
         Gdx.input.setInputProcessor(new GestureDetector(this));
+
+        this.tank = ObjectFactory.get(world, TankType.SELF);
+        this.tank.setSideOfLight(SideOfLight.NORTH);
+        this.tank.setPosition(new Vector2(0, 0));
+
+        Spatial element = ObjectFactory.get(this.world, LandscapeType.FOREST);
+        element.setPosition(new Vector2(5, 5));
+
+        element = ObjectFactory.get(this.world, LandscapeType.FOREST);
+        element.setPosition(new Vector2(5.5f, 5));
+
+        element = ObjectFactory.get(this.world, LandscapeType.BLOCK);
+        element.setPosition(new Vector2(6f, 5));
+        element = ObjectFactory.get(this.world, LandscapeType.BLOCK);
+        element.setPosition(new Vector2(6.5f, 5));
+        element = ObjectFactory.get(this.world, LandscapeType.BLOCK);
+        element.setPosition(new Vector2(6f, 5.5f));
+        element = ObjectFactory.get(this.world, LandscapeType.BLOCK);
+        element.setPosition(new Vector2(6.5f, 5.5f));
+
+        this.world.setContactListener(new ContactListener() {
+            @Override
+            public void beginContact(Contact contact) {
+                System.out.println(contact);
+            }
+
+            @Override
+            public void endContact(Contact contact) {
+                System.out.println(contact);
+            }
+
+            @Override
+            public void preSolve(Contact contact, Manifold oldManifold) {
+                System.out.println(contact);
+            }
+
+            @Override
+            public void postSolve(Contact contact, ContactImpulse impulse) {
+                System.out.println(contact);
+            }
+        });
 
         sr = new ShapeRenderer();
         this.ramka();
@@ -105,7 +156,7 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
     public void render(float delta) {
 
         this.camera.update();
-        world.step(100, 60, 20);
+        world.step(100, 6, 2);
         Gdx.gl.glClearColor(0.2f, 0.2f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
@@ -117,13 +168,24 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
         this.sr.end();
 
 
+        Array<Body> bodies = new Array<>();
+        this.world.getBodies(bodies);
+
+
         this.batch.setProjectionMatrix(this.camera.combined);
         this.batch.begin();
 
-        this.tank.draw(this.batch, 1);
+        for (Body body : bodies) {
+            Object o = body.getUserData();
+
+            if (o instanceof Drawable) {
+                ((Drawable) o).draw(this.batch, 1);
+            }
+        }
+
         this.batch.end();
 
-        this.box2DDebugRenderer.render(this.world, this.camera.combined.cpy().scale(DrawUtils.PPM, DrawUtils.PPM, 1));
+        this.box2DDebugRenderer.render(this.world, this.camera.combined.cpy().scale(0.5f, 0.5f, 1));
     }
 
     @Override
