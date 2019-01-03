@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 import biz.ostw.game.tank.TextureFactory;
+import biz.ostw.libgdx.DrawUtils;
 
 public class LandscapeFactory extends ObjectFactory {
 
@@ -35,6 +36,7 @@ public class LandscapeFactory extends ObjectFactory {
         this.bodyDef.type = BodyDef.BodyType.StaticBody;
 
         this.shape = new PolygonShape();
+        ((PolygonShape) shape).setAsBox(HALF_SIZE * DrawUtils.MPP, HALF_SIZE * DrawUtils.MPP);
     }
 
     @Override
@@ -104,7 +106,7 @@ public class LandscapeFactory extends ObjectFactory {
 
     private Body createBody(World world) {
         Body body = world.createBody(this.bodyDef);
-        body.setActive(false);
+        body.setActive(true);
         Fixture fixture = body.createFixture(this.shape, 1f);
 
         return body;

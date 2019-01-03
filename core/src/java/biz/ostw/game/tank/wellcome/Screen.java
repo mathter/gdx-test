@@ -135,21 +135,6 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
         });
 
         sr = new ShapeRenderer();
-        this.ramka();
-    }
-
-    private Body ramka() {
-        BodyDef def = new BodyDef();
-        def.type = BodyDef.BodyType.StaticBody;
-
-        Body body = this.world.createBody(def);
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(5000, 5000);
-        Fixture fixture = body.createFixture(shape, 1f);
-        shape.dispose();
-        body.getTransform().setPosition(new Vector2(0, 0));
-
-        return body;
     }
 
     @Override
@@ -185,7 +170,7 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
 
         this.batch.end();
 
-        this.box2DDebugRenderer.render(this.world, this.camera.combined.cpy().scale(0.5f, 0.5f, 1));
+        this.box2DDebugRenderer.render(this.world, this.camera.combined.cpy().scale(DrawUtils.PPM, DrawUtils.PPM, 1));
     }
 
     @Override
