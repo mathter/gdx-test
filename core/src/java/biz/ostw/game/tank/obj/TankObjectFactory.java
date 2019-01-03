@@ -23,7 +23,7 @@ public class TankObjectFactory extends ObjectFactory {
 
     {
         this.bodyDef = new BodyDef();
-        this.bodyDef.type = BodyDef.BodyType.KinematicBody;
+        this.bodyDef.type = BodyDef.BodyType.DynamicBody;
 
         this.shape = new PolygonShape();
         ((PolygonShape) shape).setAsBox(HALF_SIZE * DrawUtils.MPP, HALF_SIZE * DrawUtils.MPP);
@@ -43,12 +43,14 @@ public class TankObjectFactory extends ObjectFactory {
         Animation<TextureRegion> textureRegionAnimation = new Animation<TextureRegion>(0.1f, trackTextures, Animation.PlayMode.LOOP);
 
 
-        return new Tank(body, bodyTexture, textureRegionAnimation);
+        return new Tank(body, bodyTexture, textureRegionAnimation, (TankType) type);
     }
 
     private Body createBody(World world) {
         Body body = world.createBody(this.bodyDef);
+        body.setLinearDamping(0);
         body.setActive(true);
+        body.setAwake(true);
         Fixture fixture = body.createFixture(this.shape, 1f);
 
         return body;

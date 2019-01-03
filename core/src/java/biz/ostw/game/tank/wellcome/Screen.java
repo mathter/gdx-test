@@ -73,9 +73,12 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
     private ShapeRenderer sr;
 
     {
-        this.box2DDebugRenderer.setDrawInactiveBodies(false);
+        this.box2DDebugRenderer.setDrawInactiveBodies(true);
         this.box2DDebugRenderer.setDrawBodies(true);
         this.box2DDebugRenderer.setDrawVelocities(true);
+        this.box2DDebugRenderer.setDrawAABBs(true);
+        this.box2DDebugRenderer.setDrawContacts(true);
+        this.box2DDebugRenderer.setDrawJoints(true);
     }
 
     @Override
@@ -112,6 +115,7 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
         element = ObjectFactory.get(this.world, LandscapeType.BLOCK);
         element.setPosition(new Vector2(6.5f, 5.5f));
 
+
         this.world.setContactListener(new ContactListener() {
             @Override
             public void beginContact(Contact contact) {
@@ -125,6 +129,11 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
 
             @Override
             public void preSolve(Contact contact, Manifold oldManifold) {
+                contact.setEnabled(false);
+
+                Body bodyA = contact.getFixtureA().getBody();
+                Body bodyB = contact.getFixtureB().getBody();
+
                 System.out.println(contact);
             }
 

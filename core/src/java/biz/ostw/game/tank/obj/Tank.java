@@ -18,7 +18,7 @@ import biz.ostw.game.tank.SideOfLight;
 import biz.ostw.game.tank.TextureFactory;
 import biz.ostw.libgdx.DrawUtils;
 
-public class Tank implements Spatial, Drawable, Updatable {
+public class Tank extends AbstractGameObject<TankType> implements Spatial, Drawable, Updatable {
 
     private final Body body;
 
@@ -32,7 +32,9 @@ public class Tank implements Spatial, Drawable, Updatable {
 
     private SideOfLight sideOfLight = SideOfLight.NORTH;
 
-    Tank(Body body, TextureRegion textureSprite, Animation<TextureRegion> trackAnimation) {
+    Tank(Body body, TextureRegion textureSprite, Animation<TextureRegion> trackAnimation, TankType type) {
+
+        super(type);
 
         body.setUserData(this);
 

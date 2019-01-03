@@ -73,7 +73,7 @@ public class LandscapeFactory extends ObjectFactory {
     }
 
     private LandscapeElement createBlock(final World world) {
-        final LandscapeElement element = new SingleLandscapeElement(this.createBody(world), this.blockTextureRegion);
+        final LandscapeElement element = new SingleLandscapeElement(this.createBody(world), this.blockTextureRegion, LandscapeType.BLOCK);
 
         return element;
     }
@@ -84,7 +84,7 @@ public class LandscapeFactory extends ObjectFactory {
         if (params != null && params.length > 0 && params[0] instanceof Number) {
             int index = ((Number) params[0]).intValue() % 2;
 
-            element = new SingleLandscapeElement(this.createBody(world), this.bricksTextureRegions[index]);
+            element = new SingleLandscapeElement(this.createBody(world), this.bricksTextureRegions[index], LandscapeType.BRICK);
         } else {
             throw new IllegalArgumentException();
         }
@@ -93,13 +93,13 @@ public class LandscapeFactory extends ObjectFactory {
     }
 
     private LandscapeElement createRiver(final World world) {
-        final LandscapeElement element = new SingleLandscapeElement(this.createBody(world), this.riverTextureRegion);
+        final LandscapeElement element = new SingleLandscapeElement(this.createBody(world), this.riverTextureRegion, LandscapeType.RIVER);
 
         return element;
     }
 
     private LandscapeElement createForest(final World world) {
-        final LandscapeElement element = new SingleLandscapeElement(this.createBody(world), this.forestTextureRegion);
+        final LandscapeElement element = new SingleLandscapeElement(this.createBody(world), this.forestTextureRegion, LandscapeType.FOREST);
 
         return element;
     }
@@ -107,6 +107,7 @@ public class LandscapeFactory extends ObjectFactory {
     private Body createBody(World world) {
         Body body = world.createBody(this.bodyDef);
         body.setActive(true);
+        body.setAwake(true);
         Fixture fixture = body.createFixture(this.shape, 1f);
 
         return body;

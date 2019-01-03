@@ -1,4 +1,4 @@
 package biz.ostw.game.tank.obj;
 
-public interface LandscapeElement extends Spatial, Drawable, Updatable {
+public interface LandscapeElement extends GameObject, Spatial, Drawable, Updatable {
 }
