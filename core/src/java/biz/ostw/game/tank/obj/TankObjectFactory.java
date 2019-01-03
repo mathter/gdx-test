@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
@@ -16,6 +17,13 @@ import biz.ostw.libgdx.DrawUtils;
 public class TankObjectFactory extends ObjectFactory {
 
     protected final static float HALF_SIZE = 250;
+
+    private static final Filter FILTER = new Filter() {
+        {
+            this.categoryBits = CollisionConst.CATEGORY_TANK;
+            this.maskBits = CollisionConst.CATEGORY_TANK | CollisionConst.CATEGORY_LANDSCAPE_STRICT;
+        }
+    };
 
     private final BodyDef bodyDef;
 
@@ -52,6 +60,8 @@ public class TankObjectFactory extends ObjectFactory {
         body.setActive(true);
         body.setAwake(true);
         Fixture fixture = body.createFixture(this.shape, 1f);
+
+        fixture.setFilterData(FILTER);
 
         return body;
     }

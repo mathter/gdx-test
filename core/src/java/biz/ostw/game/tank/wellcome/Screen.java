@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactFilter;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -116,32 +117,7 @@ public class Screen extends ScreenAdapter implements GestureDetector.GestureList
         element.setPosition(new Vector2(6.5f, 5.5f));
 
 
-        this.world.setContactListener(new ContactListener() {
-            @Override
-            public void beginContact(Contact contact) {
-                System.out.println(contact);
-            }
-
-            @Override
-            public void endContact(Contact contact) {
-                System.out.println(contact);
-            }
-
-            @Override
-            public void preSolve(Contact contact, Manifold oldManifold) {
-                contact.setEnabled(false);
-
-                Body bodyA = contact.getFixtureA().getBody();
-                Body bodyB = contact.getFixtureB().getBody();
-
-                System.out.println(contact);
-            }
-
-            @Override
-            public void postSolve(Contact contact, ContactImpulse impulse) {
-                System.out.println(contact);
-            }
-        });
+        this.world.setContactListener(new ContactController());
 
         sr = new ShapeRenderer();
     }

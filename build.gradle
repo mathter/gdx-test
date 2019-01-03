@@ -52,7 +52,6 @@ project(":desktop") {
         implementation "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
-        
     }
 }
 
@@ -96,6 +95,7 @@ project(":core") {
         implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
+        implementation "org.apache.commons:commons-lang3:3.8.1"
         
     }
 }
