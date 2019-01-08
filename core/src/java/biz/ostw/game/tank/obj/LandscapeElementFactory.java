@@ -11,7 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import biz.ostw.game.tank.TextureFactory;
 import biz.ostw.libgdx.DrawUtils;
 
-public class LandscapeFactory extends ObjectFactory {
+public class LandscapeElementFactory extends ObjectFactory {
 
     protected static final float HALF_SIZE = 125;
 
@@ -51,7 +51,7 @@ public class LandscapeFactory extends ObjectFactory {
         this.bodyDef.type = BodyDef.BodyType.StaticBody;
 
         this.shape = new PolygonShape();
-        ((PolygonShape) shape).setAsBox(HALF_SIZE * DrawUtils.MPP, HALF_SIZE * DrawUtils.MPP);
+        ((PolygonShape) shape).setAsBox(HALF_SIZE * DrawUtils.MPP * 0.90f, HALF_SIZE * DrawUtils.MPP * 0.90f);
     }
 
     @Override

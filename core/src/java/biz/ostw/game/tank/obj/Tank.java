@@ -8,14 +8,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.MassData;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Transform;
-import com.badlogic.gdx.physics.box2d.World;
 
 import biz.ostw.game.tank.SideOfLight;
-import biz.ostw.game.tank.TextureFactory;
 import biz.ostw.libgdx.DrawUtils;
 
 public class Tank extends AbstractGameObject<TankType> implements Spatial, Drawable, Updatable {
@@ -32,6 +27,8 @@ public class Tank extends AbstractGameObject<TankType> implements Spatial, Drawa
 
     private SideOfLight sideOfLight = SideOfLight.NORTH;
 
+    private final Vector2 halfSize;
+
     Tank(Body body, TextureRegion textureSprite, Animation<TextureRegion> trackAnimation, TankType type) {
 
         super(type);
@@ -43,6 +40,7 @@ public class Tank extends AbstractGameObject<TankType> implements Spatial, Drawa
         this.bodySprite = new Sprite(textureSprite);
 
         this.trackAnimation = trackAnimation;
+        this.halfSize = DrawUtils.screen2d2box2d(new Vector2(TankObjectFactory.HALF_SIZE, TankObjectFactory.HALF_SIZE),0);
     }
 
     @Override
@@ -142,6 +140,11 @@ public class Tank extends AbstractGameObject<TankType> implements Spatial, Drawa
         Vector2 v = new Vector2(0, this.speed);
         v.rotate(this.bodySprite.getRotation());
         this.body.setLinearVelocity(v);
+    }
+
+    @Override
+    public Vector2 getHalfSize() {
+        return this.halfSize;
     }
 
     @Override

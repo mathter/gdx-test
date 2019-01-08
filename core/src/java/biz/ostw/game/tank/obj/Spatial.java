@@ -13,4 +13,10 @@ public interface Spatial {
     public void setPosition(Vector2 position);
 
     public Vector2 getPosition();
+
+    public float getSpeed();
+
+    public void setSpeed(float speed);
+
+    public Vector2 getHalfSize();
 }

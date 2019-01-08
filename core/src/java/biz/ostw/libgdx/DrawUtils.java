@@ -25,6 +25,19 @@ public class DrawUtils {
         return p;
     }
 
+    public static Vector2 screen2d2box2d(final Vector2 screen2dcoordinate, float offset) {
+        return screen2d2box2d(screen2dcoordinate, offset, offset);
+    }
+
+    public static Vector2 screen2d2box2d(final Vector2 screen2dcoordinate, float offsetX, float offsetY) {
+        Vector2 p = screen2dcoordinate.cpy();
+        p.x = p.x * DrawUtils.MPP;
+        p.y = p.y * DrawUtils.MPP;
+        p.add(offsetX, offsetY);
+
+        return p;
+    }
+
     public static void drawInscribed(Batch batch, Texture texture, float x, float y, float width, float height) {
 
         final float textureWidth = texture.getWidth();

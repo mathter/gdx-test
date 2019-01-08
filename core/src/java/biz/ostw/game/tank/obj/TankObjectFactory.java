@@ -34,7 +34,7 @@ public class TankObjectFactory extends ObjectFactory {
         this.bodyDef.type = BodyDef.BodyType.DynamicBody;
 
         this.shape = new PolygonShape();
-        ((PolygonShape) shape).setAsBox(HALF_SIZE * DrawUtils.MPP, HALF_SIZE * DrawUtils.MPP);
+        ((PolygonShape) shape).setAsBox(HALF_SIZE * DrawUtils.MPP * 0.90f, HALF_SIZE * DrawUtils.MPP * 0.90f);
     }
 
     @Override

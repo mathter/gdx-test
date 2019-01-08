@@ -16,6 +16,8 @@ public class SingleLandscapeElement extends AbstractGameObject<LandscapeType> im
 
     private final Sprite sprite;
 
+    private final Vector2 halfSize;
+
     protected SingleLandscapeElement(Body body, TextureRegion textureRegion, LandscapeType type) {
 
         super(type);
@@ -23,11 +25,12 @@ public class SingleLandscapeElement extends AbstractGameObject<LandscapeType> im
         body.setUserData(this);
         this.body = body;
         this.sprite = new Sprite(textureRegion);
+        this.halfSize = DrawUtils.screen2d2box2d(new Vector2(LandscapeElementFactory.HALF_SIZE, LandscapeElementFactory.HALF_SIZE), 0);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        Vector2 p = DrawUtils.box2d2screen2d(this.body.getPosition(), -LandscapeFactory.HALF_SIZE);
+        Vector2 p = DrawUtils.box2d2screen2d(this.body.getPosition(), -LandscapeElementFactory.HALF_SIZE);
 
         this.sprite.setPosition(p.x, p.y);
         this.sprite.draw(batch);
@@ -54,6 +57,21 @@ public class SingleLandscapeElement extends AbstractGameObject<LandscapeType> im
     @Override
     public Vector2 getPosition() {
         return this.body.getPosition();
+    }
+
+    @Override
+    public float getSpeed() {
+        return 0;
+    }
+
+    @Override
+    public void setSpeed(float speed) {
+        // By default do nothing.
+    }
+
+    @Override
+    public Vector2 getHalfSize() {
+        return this.halfSize;
     }
 
     @Override
