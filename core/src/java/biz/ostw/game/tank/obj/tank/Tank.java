@@ -1,4 +1,4 @@
-package biz.ostw.game.tank.obj;
+package biz.ostw.game.tank.obj.tank;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -11,6 +11,10 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Transform;
 
 import biz.ostw.game.tank.SideOfLight;
+import biz.ostw.game.tank.obj.AbstractGameObject;
+import biz.ostw.game.tank.obj.Drawable;
+import biz.ostw.game.tank.obj.Spatial;
+import biz.ostw.game.tank.obj.Updatable;
 import biz.ostw.libgdx.DrawUtils;
 
 public class Tank extends AbstractGameObject<TankType> implements Spatial, Drawable, Updatable {

@@ -1,4 +1,4 @@
-package biz.ostw.game.tank.obj;
+package biz.ostw.game.tank.obj.tank;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,8 +11,10 @@ import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
-import biz.ostw.game.tank.TextureFactory;
+import biz.ostw.game.tank.obj.CollisionConst;
+import biz.ostw.game.tank.obj.factory.ObjectFactory;
 import biz.ostw.libgdx.DrawUtils;
+import biz.ostw.libgdx.resources.TextureFactory;
 
 public class TankObjectFactory extends ObjectFactory {
 

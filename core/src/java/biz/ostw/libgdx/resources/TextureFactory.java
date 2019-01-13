@@ -1,4 +1,4 @@
-package biz.ostw.game.tank;
+package biz.ostw.libgdx.resources;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.LifecycleListener;

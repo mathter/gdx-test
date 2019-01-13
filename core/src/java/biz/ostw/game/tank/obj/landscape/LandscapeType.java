@@ -1,4 +1,4 @@
-package biz.ostw.game.tank.obj;
+package biz.ostw.game.tank.obj.landscape;
 
 public enum LandscapeType {
     BRICK,

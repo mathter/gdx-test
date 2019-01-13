@@ -1,4 +1,4 @@
-package biz.ostw.game.tank.obj;
+package biz.ostw.game.tank.obj.factory;
 
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;

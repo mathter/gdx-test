@@ -1,4 +1,4 @@
-package biz.ostw.game.tank.obj;
+package biz.ostw.game.tank.obj.landscape;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -8,9 +8,13 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Transform;
 
 import biz.ostw.game.tank.SideOfLight;
+import biz.ostw.game.tank.obj.AbstractGameObject;
+import biz.ostw.game.tank.obj.landscape.LandscapeElement;
+import biz.ostw.game.tank.obj.landscape.LandscapeElementFactory;
+import biz.ostw.game.tank.obj.landscape.LandscapeType;
 import biz.ostw.libgdx.DrawUtils;
 
-public class SingleLandscapeElement extends AbstractGameObject<LandscapeType> implements LandscapeElement {
+class SingleLandscapeElement extends AbstractGameObject<LandscapeType> implements LandscapeElement {
 
     private final Body body;
 

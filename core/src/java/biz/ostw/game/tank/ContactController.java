@@ -1,4 +1,4 @@
-package biz.ostw.game.tank.wellcome;
+package biz.ostw.game.tank;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -8,11 +8,10 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import biz.ostw.game.tank.SideOfLight;
 import biz.ostw.game.tank.obj.CollisionConst;
 import biz.ostw.game.tank.obj.GameObject;
 import biz.ostw.game.tank.obj.Spatial;
-import biz.ostw.game.tank.obj.TankType;
+import biz.ostw.game.tank.obj.tank.TankType;
 
 public class ContactController implements ContactListener {
 

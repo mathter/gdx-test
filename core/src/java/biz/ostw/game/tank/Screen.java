@@ -1,4 +1,4 @@
-package biz.ostw.game.tank.wellcome;
+package biz.ostw.game.tank;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -15,13 +15,12 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import biz.ostw.game.tank.SideOfLight;
 import biz.ostw.game.tank.obj.Drawable;
-import biz.ostw.game.tank.obj.LandscapeType;
-import biz.ostw.game.tank.obj.ObjectFactory;
+import biz.ostw.game.tank.obj.landscape.LandscapeType;
+import biz.ostw.game.tank.obj.factory.ObjectFactory;
 import biz.ostw.game.tank.obj.Spatial;
-import biz.ostw.game.tank.obj.Tank;
-import biz.ostw.game.tank.obj.TankType;
+import biz.ostw.game.tank.obj.tank.Tank;
+import biz.ostw.game.tank.obj.tank.TankType;
 import biz.ostw.libgdx.DrawUtils;
 
 public class Screen extends ScreenAdapter implements GestureDetector.GestureListener {
