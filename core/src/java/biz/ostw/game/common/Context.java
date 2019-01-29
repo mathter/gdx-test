@@ -8,15 +8,17 @@ public abstract class Context {
 
     private static Context MAIN;
 
-    public static Context getMAIN() {
+    public static Context getContext() {
         return MAIN;
     }
 
-    public static void setMAIN(Context MAIN) {
+    public static void setContext(Context MAIN) {
         Context.MAIN = MAIN;
     }
 
     public abstract World getWorld();
 
     public abstract Screen getScreen();
+
+    public abstract void dispose();
 }

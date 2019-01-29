@@ -8,8 +8,8 @@ public abstract class Scenario {
 
     private static Scenario MAIN;
 
-    public static final Scenario getScenario() {
-        return MAIN;
+    public static final <T extends Scenario> T getScenario() {
+        return (T) MAIN;
     }
 
     public static final void setScenario(Scenario scenario) {
@@ -21,4 +21,8 @@ public abstract class Scenario {
     public abstract InputProcessor getInputProcessor();
 
     public abstract ContactListener getContactListener();
+
+    public abstract void step(float delta);
+
+    public abstract void pause();
 }

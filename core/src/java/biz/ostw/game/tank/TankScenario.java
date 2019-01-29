@@ -6,7 +6,14 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 
 import biz.ostw.game.common.Scenario;
 
-public class TankScenario implements Scenario {
+public class TankScenario extends Scenario {
+
+    private static final float SPEED = 0.2f;
+
+    public float getSpeed(){
+
+        return SPEED;
+    }
 
     @Override
     public Vector2 getWorldSize() {
@@ -21,5 +28,15 @@ public class TankScenario implements Scenario {
     @Override
     public ContactListener getContactListener() {
         return null;
+    }
+
+    @Override
+    public void step(float delta) {
+
+    }
+
+    @Override
+    public void pause() {
+
     }
 }
