@@ -22,7 +22,7 @@ public class TankScenario extends Scenario {
 
     @Override
     public InputProcessor getInputProcessor() {
-        return null;
+        return new Sim;
     }
 
     @Override
@@ -32,11 +32,13 @@ public class TankScenario extends Scenario {
 
     @Override
     public void step(float delta) {
-
     }
 
     @Override
     public void pause() {
+    }
+
+    private Tank getPlayerTank() {
 
     }
 }

@@ -2,8 +2,6 @@ package biz.ostw.game.common;
 
 import com.badlogic.gdx.physics.box2d.World;
 
-import biz.ostw.game.tank.Screen;
-
 public abstract class Context {
 
     private static Context MAIN;
@@ -17,8 +15,6 @@ public abstract class Context {
     }
 
     public abstract World getWorld();
-
-    public abstract Screen getScreen();
 
     public abstract void dispose();
 }

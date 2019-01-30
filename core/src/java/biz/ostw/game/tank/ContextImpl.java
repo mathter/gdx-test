@@ -10,8 +10,6 @@ public class ContextImpl extends Context {
 
     final Screen screen;
 
-
-
     ContextImpl(World world, Screen screen) {
         this.world = world;
         this.screen = screen;
@@ -20,11 +18,6 @@ public class ContextImpl extends Context {
     @Override
     public World getWorld() {
         return this.world;
-    }
-
-    @Override
-    public Screen getScreen() {
-        return this.screen;
     }
 
     @Override
